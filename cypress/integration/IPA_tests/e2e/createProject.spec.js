@@ -4,9 +4,11 @@ import LoginPage from '../../IPA_tests/Login/LoginPage';
 describe("Create new Project", () => {
     //Load the website using cookie key
     it("should load Internship Portal website with login credentials", () => { //Access platform with login credentials
-       LoginPage.visitPage();
-       LoginPage.LogIn();
+      LoginPage.LogIn(); 
+      LoginPage.visitPage();
+       LoginPage.validateLogIn();
        LoginPage.validateProject();
+       
       
     })
     //Interact with new project button 

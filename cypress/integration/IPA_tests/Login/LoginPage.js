@@ -14,6 +14,10 @@ export default class LoginPage {
     static LogIn() {
         cy.login()
     }
+    static validateLogIn() {
+        cy.contains(".nav-item.other-item","Log Out").should("be.visible")
+
+    }
     static validateProject() {
         cy.get("h4").contains("Bondane_Catalin_Test").should("be.visible")
     }
