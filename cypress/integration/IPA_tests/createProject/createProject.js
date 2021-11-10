@@ -1,44 +1,43 @@
-const button = ".p-button"
-const dataArea= ".p-inputtext"
-const buttonDel=".p-button-label"
-const popup=".p-confirm-popup-message"
+import {button,dataAreaProject,buttonDelProject,popupDelProject,cardProject,time} from "../../Content_Selectors/const"
 
 
-export default class createProject {
+
+ class Project {
+     //Validate and interact with New Project button to create a new project.
     static NewProjectButton() {
-        cy.wait(3000)
-        cy.get(".project-card.new-project").contains("New Project").click()
+        cy.wait(time)
+        cy.contains(cardProject,"New Project").should("be.visible")
+        cy.contains(cardProject,"New Project").click()
 
     }
+    //Input valid data in  new project text fields
     static fillDataProject() {
         cy.fixture("fillData").then(content=> {
-            cy.wait(3000)
-            cy.get(dataArea).eq(0).clear()
-            cy.get(dataArea).eq(0).type(content.projectName, {
+            cy.wait(time)
+            cy.get(dataAreaProject).eq(0).clear().type(content.projectName, {   //Input first valid data field
                 delay: 100
             })
-            cy.get(dataArea).eq(1).clear()
-            cy.get(dataArea).eq(1).type(content.projectTag, {
+            cy.get(dataAreaProject).eq(1).clear().type(content.projectTag, {  //Input second valid data field
                 delay: 100
             })
         })
        
     }
+    //Interact with Create button as final step to create a new project
     static createProjectButton() {
-        cy.wait(3000)
+        cy.wait(time)
         cy.get(button).contains("Create").click()
 
     }
+    //Delete new project created 
     static deleteProjectButton() {
-        cy.wait(10000)
+        cy.wait(time)
         cy.get(button).contains("Delete Project").click()
-        cy.wait(1000)
     }
-
+    // Interact with popup for delete confirmation of the project
     static deleteProjectConfirmation() {
-        cy.wait(1000)
-        cy.get(popup).should("be.visible")
-        cy.wait(1000)
-        cy.get(buttonDel).contains("Delete").click()
+        cy.wait(time)
+        cy.get(popupDelProject).should("be.visible")
+        cy.get(buttonDelProject).contains("Delete").click()
     }
-}
+} export default Project

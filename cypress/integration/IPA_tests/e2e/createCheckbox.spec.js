@@ -1,89 +1,96 @@
 import LoginPage from '../../IPA_tests/Login/LoginPage';
-import AddStage from '../../IPA_tests/createStage/createStage'
-import AddCheckbox from '../../IPA_tests/createCheckbox/createCheckbox'
-import AddQuestion from '../../IPA_tests/createQuestion/createQuestion'
+import Stage     from '../../IPA_tests/createStage/createStage'
+import Checkbox  from '../../IPA_tests/createCheckbox/createCheckbox'
+import Question  from '../../IPA_tests/createQuestion/createQuestion'
+import Project   from '../../IPA_tests/createProject/createProject'
 
 
 describe("Access platform and login", () => {
     //Load the website using cookie key
     it("should load Internship Portal website with login credentials", () => { //Access platform with login credentials
-        LoginPage.LogIn(); 
+        LoginPage.LogIn();
         LoginPage.visitPage();
-         LoginPage.validateLogIn();
-         LoginPage.validateProject();
-
-    })
-
-    //Interact with star now button to view project details
-    it("Should click on Start Now", () => {
-        LoginPage.loadProject();
+        LoginPage.validateLogIn();
     })
 })
 
-
+describe("Creating a new project", () => {
+    //Interact with create project button
+    it("Should click on Create Project button", () => {
+        Project.NewProjectButton();
+    })
+    //Fill data to input project name and tags
+    it("Should fill Project name and Project topics", () => {
+        Project.fillDataProject();
+    })
+    //Interact with create button to create the project
+    it("Should click Create button", () => {
+        Project.createProjectButton();
+    })
+})
 
 describe("Creating a new stage", () => {
     //Input on  the new stage
     it("should click on New Stage button", () => {
-        AddStage.createStage();
+        Stage.createStage();
     })
     //Input details for stage name
     it("should fil New stage name ", () => {
-        AddStage.fillDataStageName();
+        Stage.fillDataStageName();
     })
     //Input details for stage points
     it("should fill points ", () => {
-        AddStage.fillDataStagePoints();
+        Stage.fillDataStagePoints();
     })
     //Interact with save button to keep our inputs 
     it("should click on Save button", () => {
-
-        AddStage.saveStage();
+        Stage.saveStage();
     })
     //Validate our new stage is created
-    it("Should load new stage created ", () => { //Validate new stage created.
-        AddStage.validateStage();
-
+    it("Should load new stage created ", () => { 
+        Stage.validateStage();
     })
-    //Clean up after our work, deleting a stage
-    
-
-
 })
 
 //Create a new checkbox question
 describe("Creating a new checkbox question", () => {
     //Interact with new question button to show input fields
     it("Should click on New Question button", () => {
-      AddCheckbox.createQuestionCb()
-
+        Checkbox.createQuestionCb()
     })
     //Input details about question fields
     it("should fil Question field ", () => {
-
-       AddCheckbox.fillDataQuestionCb()
+        Checkbox.fillDataQuestionCb()
     })
     //Input details about answer fields
     it("should answer field ", () => {
-
-       AddCheckbox.fillDataAnswerCb()
-
+        Checkbox.fillDataAnswerCb()
     })
     //Validate our checkbox is working
     it("should mark checkbox answer", () => {
-    AddCheckbox.markCheckbox()
+        Checkbox.markCheckbox()
     })
-
     //Interact with update button to save input details
     it("should click Update to save", () => {
-       AddQuestion.saveQuestion()
+        Question.saveQuestion()
     })
     //Clean up after our work, delete a question
     it("should click on delete question", () => {
-        AddQuestion.deleteQuestion()
+        Question.deleteQuestion()
     })
+ describe("Should delete question, stage, project", () => {
     //Clean up after our work, delete a stage
     it("should delete a stage", () => {
-       AddStage.deleteStage()
+        Stage.deleteStage()
     })
+    //Clean up after our work, delete a project
+    it("Should delete project", () => {
+        Project.deleteProjectButton();
+    })
+    //Validate that our pop-up for delete is present and delete the project
+    it("Should display pop-up confirmation massage", () => {
+        Project.deleteProjectConfirmation();
+    })
+})
+
 })
